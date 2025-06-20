@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citation Network Results</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Citation Network Results</h1>
+        <a href="/" class="back-link">Back to Search</a>
+        {% for graph in graphs %}
+            <div>
+                <h2>Papers {{ loop.index0 * 10 + 1 }} to {{ loop.index0 * 10 + graph['papers']|length }}</h2>
+                <img src="data:image/png;base64,{{ graph['image'] }}" alt="Citation Network Graph">
+                <ul class="paper-list">
+                    {% for paper, citation_count in graph['papers'] %}
+                        <li>{{ paper }} (Cited by: {{ citation_count }})</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
